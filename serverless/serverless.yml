@@ -1,0 +1,139 @@
+service: serverless-code
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  authorizationFunc:
+    handler: dist/src/handler/authorizationHandler.authorizationFunc
+  userAuth:
+    handler: dist/src/handler/userHandler.userAuth
+    events:
+      - http:
+          path: userAuth
+          method: post
+          cors: true
+  userGet:
+    handler: dist/src/handler/userHandler.userGet
+    events:
+      - http:
+          path: userGet
+          method: get
+          cors: true
+  userGetWithEvent:
+    handler: dist/src/handler/userHandler.userGetWithEvent
+    events:
+      - http:
+          path: userGetWithEvent
+          method: get
+          cors: true        
+  userQuery:
+    handler: dist/src/handler/userHandler.userQuery
+    events:
+      - http:
+          path: userQuery
+          method: get
+          cors: true
+  userInsert:
+    handler: dist/src/handler/userHandler.userInsert
+    events:
+      - http:
+          path: userInsert
+          method: post
+          cors: true
+  userUpdate:
+    handler: dist/src/handler/userHandler.userUpdate
+    events:
+      - http:
+          path: userUpdate
+          method: put
+          cors: true
+  userVolunteerUpdate:
+    handler: dist/src/handler/userHandler.userVolunteerUpdate
+    events:
+      - http:
+          path: userVolunteerUpdate
+          method: put
+          cors: true
+  userDelete:
+    handler: dist/src/handler/userHandler.userDelete
+    events:
+      - http:
+          path: userDelete
+          method: delete
+          cors: true
+  volunteerInsert:
+    handler: dist/src/handler/volunteerHandler.volunteerInsert
+    events:
+      - http:
+          path: volunteerInsert
+          method: post
+          cors: true
+  appointmentController:
+    handler: dist/src/handler/appointmentHandler.appointmentInsert
+    events:
+      - http:
+          path: appointmentInsert
+          method: post
+          cors: true
+  emailPostController:
+    handler: dist/src/handler/emailHandler.emailPost
+    events:
+      - http:
+          path: emailPost
+          method: post
+          cors: true
+  eventInsert:
+    handler: dist/src/handler/eventHandler.eventInsert
+    events:
+      - http:
+          path: eventInsert
+          method: post
+          cors: true
+  eventQuery:
+    handler: dist/src/handler/eventHandler.eventsQuery
+    events:
+      - http:
+          path: eventsQuery
+          method: get
+          cors: true   
+  eventsQueryWithUser:
+    handler: dist/src/handler/eventHandler.eventsQueryWithUser
+    events:
+      - http:
+          path: eventsQueryWithUser
+          method: get
+          cors: true             
+  userEventInsert:
+    handler: dist/src/handler/userEventHandler.userEventInsert
+    events:
+      - http:
+          path: userEventInsert
+          method: post
+          cors: true
+  userEventQuery:
+    handler: dist/src/handler/userEventHandler.userEventQuery
+    events:
+      - http:
+          path: userEventQuery
+          method: get
+          cors: true     
+  userEventUpdate:
+    handler: dist/src/handler/userEventHandler.userEventUpdate
+    events:
+      - http:
+          path: userEventUpdate
+          method: put
+          cors: true                  
+
+package:
+  exclude:
+    - venv/**
+
+plugins:
+  - serverless-offline
